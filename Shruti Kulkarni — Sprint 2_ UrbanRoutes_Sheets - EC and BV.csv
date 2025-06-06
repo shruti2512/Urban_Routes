@@ -1,0 +1,42 @@
+Use this sheet to record your equivance partitions/classes and your boundary values,,,,,
+,,,,,
+Feature Under Test,Equivalence Class,Boundary Values,Test Data for Equivalence Class,Test Data for Boundary Values,Comments
+"""From"" Field",numbers allowed,,"0, 23, 112,334,10201, ",,
+,spaces allowed,,1717 E 7th St,,
+,dashes allowed,,25-2 Bridge Creek Ave,,
+,periods allowed,,1811 E 20th St.,,
+,commas allowed,,"East 2nd Street, 601",,
+,Latin characters allowed,, S Broadway,,
+,Non-Latin characters not allowed,,"άωεηυε, महात्मा गांधी
+",,Edited after intital review
+,Max length=50,"0,1,49,50,51","""1"", ""a"",""East 2nd Street, 601"", ""123 martin luther king dr.,"", "" ""","""1"", ""a"",""East 2nd Street, 601"", ""123003000 martin luther king dr., New York, New York, United States of America"", ""123003000 martin luther king drive., New York, USA """,
+,Max length exceeds 50 characters,"50, 51, 52","1230030001 martin luther king drive., New York, USA (51 characters)","123003000 martin luther king drive., New York, USA (50 characters), 1230030001 martin luther king drive., New York, USA (51 characters), 12300300012 martin luther king drive., New York, USA (52 characters)",Edited after intital review
+,spaces are trimmed at the beginning of adddress,,"""           1717 E 7th St""",,
+,spaces are trimmed at the end of address,,"""1717 E 7th St       """,,
+,Incorrect address,,"""123@#$"", ""$_ street"", ",,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+"""To"" field",numbers allowed,,"0, 23, 112,334,10201, ",,
+,spaces allowed,,1717 E 7th St,,
+,dashes allowed,,25-2 Bridge Creek Ave,,
+,periods allowed,,1811 E 20th St.,,
+,commas allowed,,"East 2nd Street, 601",,
+,Latin characters allowed,, S Broadway,,
+,Non-Latin characters not allowed,,"άωεηυε, महात्मा गांधी
+",,Edited after intital review
+,Max length=50,"0,1,49,50,51","""1"", ""a"",""East 2nd Street, 601"", ""123 martin luther king dr.,"", "" ""","""1"", ""a"",""East 2nd Street, 601"", ""123003000 martin luther king dr., New York, New York, United States of America"", ""123003000 martin luther king drive., New York, USA """,
+,Max length exceeds 50 characters,"50, 51, 52","1230030001 martin luther king drive., New York, USA (51 characters)","123003000 martin luther king drive., New York, USA (50 characters), 1230030001 martin luther king drive., New York, USA (51 characters), 12300300012 martin luther king drive., New York, USA (52 characters)",Edited after intital review
+,spaces are trimmed at the beginning of adddress,,"""           1717 E 7th St""",,
+,spaces are trimmed at the end of address,,"""1717 E 7th St       """,,
+,Incorrect address,,"""123@#$"", ""$_ street"", ",,
