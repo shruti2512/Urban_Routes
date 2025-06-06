@@ -1,0 +1,60 @@
+Sprint 3: CarSharing_AeroTaxi
+
+Requirements Analysis
+Requirements for Car Sharing Payment feature
+
+FR-CS32:
+●	While ordering a car, Check if the card information is entered by the user
+
+1.	“Card Number” cannot be empty
+2.	The “Add” button is clicked after card number is entered
+3.	Multiple cards can be entered (No limit)
+
+FR-CS33:
+●	Check requirements for Credit Card Number
+
+1.	Numbers only. System doesn’t allow any other character
+2.	Length should not exceed 12 characters
+3.	Input format is “nnnn nnnn nnnn” (n=number)
+4.	Check if Boundary values are within 0000 and 9999, inclusive
+5.	Check if spaces are added between numbers when the field is not in focus
+6.	“Add” button is inactive if input is less than 12 characters
+
+●	Check requirements for CVV/CVC
+
+1.	Numbers only. System doesn’t allow any other character
+2.	Length should not exceed 2 characters 
+3.	Input format is “nn” (n=number)
+4.	Check if Boundary values are within 01 and 99, inclusive
+5.	“Add” button is inactive if input is less than 2 characters
+
+FR-CS34: Displaying Credit Card information
+
+1.	Check if last 4 digits of all credit cards entered on the system are displayed
+2.	Check if the first 8 digits of all the credit cards are not displayed. (only xx are shown)
+
+FR-CS35: Encrypting Credit Card information
+
+                 1. Check if Credit Card number is encrypted when sent across the server
+2. Check if CVV/CVC is encrypted when sent across the server
+ 
+
+
+
+
+Requirements for Aero Taxi Booking feature
+
+FR-AT4: Total travel time and cost should be calculated correctly
+
+●	Check if travel time is calculated correctly
+●	Check if cost is calculated correctly
+
+FR-AT6: The calculation result should display total travel time and cost for the Aero Taxi
+
+●	Check if the result displays total travel time correctly
+●	Check if the result displays cost correctly
+
+
+
+
+
