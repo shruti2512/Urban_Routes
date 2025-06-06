@@ -1,0 +1,23 @@
+Use this sheet to record your equivance partitions/classes and your boundary values,,,,,
+,,,,,
+Feature Under Test,Equivalence Class,Boundary Values,Test Data for Equivalence Class,Test Data for Boundary Values,Comments
+"FR-CS33 : ""Card Number""",Numbers Only,,"111122223333, 000012345678, 000012349999",,
+,Latin characters not allowed,,aaaabbbbcccc,,
+,Special characters not allowed,,1111aaaa@!cv,,
+,Max Length=12,"11,12,13","11112222333 (11 characters), 111122223333(12 Characters), 1111222233334 (13 characters)","11112222333 (11 characters), 111122223333(12 Characters), 1111222233334 (13 characters)",
+,Length<12 /less than 12 characters,"0, 1, 10, 11, 12",""" ""(0 charcters), 1111222233 (10 characters), 11112222333 (11 characters), 111122223333 (12 characters)",""" ""(0 charcters), 1111222233 (10 characters), 11112222333 (11 characters), 111122223333 (12 characters)",Can Eliminate duplicate test cases
+,Length>12 / exceeds 12 characters,"12, 13","11122223333(12 Characters),  1111222233334 (13 characters)","11122223333(12 Characters),  1111222233334 (13 characters)",Can Eliminate duplicate test cases
+,Length=0 (Card Number empty),0,""" "" (0 characters)",""" "" (0 characters)",
+,Input format is displayed correctly with appropriate spaces when not in focus,,1.11E+11,,Should be displayed as 1111 2222 3333
+,Boundary values are within 0000 and 9999  ,"000000000000, 0000000000000001, 9999999999999998, 999999999999","000000000000, 0000000000000001, 9999999999999998, 999999999999","000000000000, 0000000000000001, 9999999999999998, 999999999999",
+,,,,,
+,,,,,
+"FR-CS33: ""CVV/CVC""",Numbers Only,,"11, 22, 12, 99",,
+,Latin Characters not allowed,,"qq, cc,hh",,
+,Special Characters not allowed,,"!@, ^&, .., --, __",,
+,Max Length=2 ,"1, 2 , 3","4,67,999","1 (Single Character), 11(2 Characters), 111(3 Characters)",
+,Length<2,"0', 1, 2",""" ""(Blank), 1(1 character), 23 (2 characters)",""" ""(Blank), 1(1 character), 23 (2 characters)",Can Eliminate duplicate test cases
+,Length>2 ,"2, 3, 4, ","45(2 characters), 678(3 characters), 3456 (4 characters)","11(2 Characters),  111(3 Characters), 1111(4 characters)",Can Eliminate duplicate test cases
+,Length=0 (CVV Number is  empty),,Nil,,
+,Boundary values are within 01 and 99 ,"00, 01, 02, 98, 99","00, 01, 02, 98, 99","00, 01, 02, 98, 99",
+,Input >99,"99,100, 101","99, 100, 101","99, 100, 101",
