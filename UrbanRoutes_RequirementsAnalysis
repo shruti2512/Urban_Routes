@@ -4,76 +4,76 @@ Requirements Analysis
 Functional Requirements
 FR-1:
 ●	Check the input fields are labeled in the interface.
-                 1. “From” input field in the interface
+     1. “From” input field in the interface
      2. “To” input field in the interface.
-●	     Check if we have 3 mode options.
-1.     Check if we have mode option named “Optimum”
-2.     Check if we have mode option named “Fastest”
-3.     Check if we have mode option named “Custom”
+●	Check if we have 3 mode options.
+     1.     Check if we have mode option named “Optimum”
+     2.     Check if we have mode option named “Fastest”
+     3.     Check if we have mode option named “Custom”
  
-●	     Check if we have icons for each type of transport and “on foot”
-1.     An icon for “on foot”
-2.     An icon for “user’s car”
-3.     An icon for “car-sharing”
-4.     An icon for “taxi”
-5.     An icon for “scooter”
-6.     An icon for “bicycle” 
+●	Check if we have icons for each type of transport and “on foot”
+     1.     An icon for “on foot”
+     2.     An icon for “user’s car”
+     3.     An icon for “car-sharing”
+     4.     An icon for “taxi”
+     5.     An icon for “scooter”
+     6.     An icon for “bicycle” 
 
 
 FR-2:
 ●	Check if user can enter departure and destination into “to” and “from” fields, respectively
-1.     Check if user can enter departure into “to” field
-2.     Check if user can enter destination into “from” field
+    1.     Check if user can enter departure into “to” field
+    2.     Check if user can enter destination into “from” field
 ●	Allow for spaces when the fields are entered
-1.     Check if spaces can be entered in the beginning of the “to” field”
-2.     Check if spaces can be entered towards the end of the “to” field”
-3.     Check if spaces can be entered in the beginning of the “from” field”
-4.     Check if spaces can be entered towards the end of the “from” field”
+    1.     Check if spaces can be entered in the beginning of the “to” field”
+    2.     Check if spaces can be entered towards the end of the “to” field”
+    3.     Check if spaces can be entered in the beginning of the “from” field”
+    4.     Check if spaces can be entered towards the end of the “from” field”
 ●	Check if spaces are deleted when the fields are not in focus.
-1.     Check if spaces are automatically deleted after you shift focus from “to” field
-2.     Check if spaces are automatically deleted after you shift focus from “from” field
+    1.     Check if spaces are automatically deleted after you shift focus from “to” field
+    2.     Check if spaces are automatically deleted after you shift focus from “from” field
  
 FR-3:
 ●	Check if the “From” and “To” fields are empty when clicked
  
-1.     “From” field is empty when clicked
-2.     “To” field is empty when clicked
+   1.     “From” field is empty when clicked
+   2.     “To” field is empty when clicked
  
 ●	None of the 3 modes are selected
-1.     “Optimum” is not selected.
-2.     “Fastest” is not selected.
-3.      “Custom” is not selected.
+   1.     “Optimum” is not selected.
+   2.     “Fastest” is not selected.
+   3.      “Custom” is not selected.
  
 ●	Transport panel (on foot, the user's car, car-sharing, taxi, scooter, or bicycle) is inactive
  
 FR-4:
 ●	 Only numbers, spaces, dashes, periods, commas, and Latin characters are allowed in the address fields.
-1.     Check if address field “to” can have numbers
-2.     Check if address field “to” can have spaces
-3.     Check if address field “to” can have dashes
-4.     Check if address field “to” can have periods
-5.     Check if address field “to” can have commas
-6.     Check if address field “to” can have Latin Characters
-7.     Check if address field “from” can have numbers
-8.     Check if address field “from” can have spaces
-9.     Check if address field “from” can have dashes
-10.  Check if address field “from” can have periods
-11.  Check if address field “from” can have commas
-12.  Check if address field “from” can have Latin Characters 
+   1.     Check if address field “to” can have numbers
+   2.     Check if address field “to” can have spaces
+   3.     Check if address field “to” can have dashes
+   4.     Check if address field “to” can have periods
+   5.     Check if address field “to” can have commas
+   6.     Check if address field “to” can have Latin Characters
+   7.     Check if address field “from” can have numbers
+   8.     Check if address field “from” can have spaces
+   9.     Check if address field “from” can have dashes
+  10.     Check if address field “from” can have periods
+  11.     Check if address field “from” can have commas
+  12.     Check if address field “from” can have Latin Characters 
  
 ●	 Maximum length of address is 50 characters
-1.     Check if the “To” field has maximum length of 50 characters
-2.     Check if the “From” field has maximum length of 50 characters
+  1.     Check if the “To” field has maximum length of 50 characters
+  2.     Check if the “From” field has maximum length of 50 characters
  
 ●	 Check if spaces are trimmed when the field if not in focus
-                 1. Check if spaces are trimmed at the beginning of “to” field, when the field is not in focus
-                 2. Check if spaces are trimmed at the end of “to” field, when the field is not in focus
-3.     Check if spaces are trimmed at the beginning of “from” field, when the field is not in focus
-                 4. Check if spaces are trimmed at the end of “to” field, when the field is not in focus
+  1.     Check if spaces are trimmed at the beginning of “to” field, when the field is not in focus
+  2.     Check if spaces are trimmed at the end of “to” field, when the field is not in focus
+  3.     Check if spaces are trimmed at the beginning of “from” field, when the field is not in focus
+  4.     Check if spaces are trimmed at the end of “to” field, when the field is not in focus
  
 ●	  An error message “incorrect input” is generated
-1. If any other input is provided in the address “to” field, system should display error message “incorrect input”
-2. If any other input is provided in the address “from” field, system should display error message “incorrect input”
+  1.     If any other input is provided in the address “to” field, system should display error message “incorrect input”
+  2.     If any other input is provided in the address “from” field, system should display error message “incorrect input”
  
 Test Planning
  
