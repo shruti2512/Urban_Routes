@@ -1,1 +1,2 @@
-This file contains test cases EC and BV 
+This file contains test cases for Urban Routes and Urban Grocers
+
