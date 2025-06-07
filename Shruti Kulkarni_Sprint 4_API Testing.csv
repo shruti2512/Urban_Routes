@@ -1,0 +1,1185 @@
+No,Test Cases,Test Steps,Test Data (Request Body),Expected Result,Actual Result,Status,Link to Bug Report
+1,1. Verify the user can add an existing product ID to the kit. ,"1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using an existing product ID in the path params and request body.
+
+3. The user adds existing products to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": 3,
+      ""quantity"": 3
+    }
+  ]
+}","- Added existing products to the kit
+
+- Status: 200 OK","- Added existing products to the kit
+
+- Status: 200 OK",Passed,
+2,1. Verify the user can add the same product ID (as added above) to the same kit. ,"1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using the same product ID as used in the above test case, in the path params and request body.
+
+3. The user adds the same products (with updated ""quantities"" ) to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": 3,
+      ""quantity"": 3
+    }
+  ]
+}","- Added existing products (with updated quantities)to the kit
+
+- Status: 200 OK","- Added existing products to the kit
+
+- Status: 200 OK",Passed,
+3,"Verify if ""404 Bad Request"" is returned when products with non-existent productId are added to the kit ","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using a non-existent product ID in the path params and request body.
+
+3. The user adds the same products (with updated ""quantities"" ) to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": 100,
+      ""quantity"": 3
+    }
+  ]
+}","- This product shouldn't be added as the id is non-existent in the productList
+
+- ""404 Bad Request"" error should be returned","-Even though the product is not added to the list, the system still returns Status 200 OK.",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-1
+4,Verify if user can add multiple existing productIDs to the kit,"1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends multiple product IDs in the path params and request body.
+
+3. The user adds the multiple products to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.","Path params: id=6
+{
+  ""productsList"": [
+    {
+      ""id"": 1,
+      ""quantity"": 3
+    }
+    {
+       ""id"": 2,
+       ""quantity"": 3
+    }
+  ]
+}","- Added multiple products (with updated quantities)to the kit
+
+- Status: 200 OK","-Multiple products are added to the kit with updated quantities to the kit
+
+-Status 200 OK",Passed,
+5,"Verify if only numbers are accepted for ""id"" param in the body section (productList)","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using an existing product ID (number) in the path params and request body.
+
+3. The user adds existing products to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": ""12"",
+      ""quantity"": 3
+    }
+  ]
+}","-Numbers are accepted as a valid parameter for productId
+
+-Status: 200OK","-Numbers are accepted as a valid parameter for productId
+
+-Status: 200 OK",Passed,
+6,"Verify if strings are accepted for ""id"" param in the body section (productList)","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using ""string"" for product ID param instead of number in the path params and request body.
+
+3. The user gets 500 Internal server error on the response.","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": ""abc"",
+      ""quantity"": 3
+    }
+  ]
+}","-Strings are not a valid form of parameter for productId
+
+-""404 Not Found"" response is expected","Strings are not accepted for productID param
+
+-""500 Internal Server Error""",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-8
+7,"Verify if special characters are accepted for ""id"" param in the body section (productList)","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using ""special characters"" for product ID param instead of number in the path params and request body.
+
+3. The user gets 400 Bad Request error on the response.","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": ""@#"",
+      ""quantity"": 3
+    }
+  ]
+}","-Special Characters are not a valid form of parameter for productId
+
+-""400 Bad Request"" is generated","
+-""500 Internal Server Error""",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-9
+8,"Verify if only numbers are accepted for ""quantity"" param  in the body section (productList)","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using an existing product ID and quantity (numbers) in the path params and request body.
+
+3. The user adds existing products to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": 12,
+      ""quantity"": 3
+    }
+  ]
+}","-Numbers are accepted as a valid parameter for productId
+
+-Status: 200OK status is generated","-Numbers are accepted as a valid parameter for productId
+
+-Status: 200OK",Passed,
+9,"Verify if strings are accepted for ""quantity"" param in the body section (productList)","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using an existing product ID and ""strings"" for quantity (instead of numbers) in the path params and request body.
+
+3. generats error
+","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": 12,
+      ""quantity"": ""abc""
+    }
+  ]
+}","-Strings are not an acceptable form of input for productId
+
+-""400 Bad Request"" is generated","
+
+-""500 Internal server"" is generated",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-11
+10,"Verify if special characters are accepted for ""quantity"" param in the body section (productList)","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using an existing product ID and ""special characters"" for quantity (instead of numbers) in the path params and request body.
+
+3. Generates error","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": ""12"",
+      ""quantity"": ""@*""
+    }
+  ]
+}","-Special Characters are not an acceptable form of input for product ""Id""
+
+-""400 Bad Request"" is generated","-""500 Internal server"" is generated",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-10
+11,Verify if error is returned if only id (and not quantity) is passed,"1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using only existing product ID and no quantity (missing quantity) in the path params and request body.
+
+3. Generates error","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""id"": ""12"",
+    }
+  ]
+}","-Quantity is a required field
+
+-""400 Bad Request"" is generated","-""500 Internal Server"" error is generated",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-12
+12,Verify if error is returned if only quantity(and not id) is passed,"1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request with no existing product ID (missing product ID) and only quantities in the path params and request body.
+
+3. Generates error","Path params: id=6
+
+{
+  ""productsList"": [
+    {
+      ""quantity"": @*
+    }
+  ]
+}","-ProductId is a required field
+
+
+-""400 Bad Request"" is generated ","-""500 Internal Server"" error is generated",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-13
+13,Verify that a request cannot be sent with an empty request body. Error is generated ,"1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request with missing request body.
+
+3. Generates error","Path params: id=6
+
+     {    }",#NAME?,"-The request is sent with an empty request body
+
+-200 OK status is generated ",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-2
+14,"Verify if length of ""productslist"" can be 29","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends request with 29 existing product IDs and quantitites in the path params and request body.
+
+3. The user adds the 29 products to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.","Path params: id=6
+TOTAL 29 PRODUCTS IN THE LIST
+{
+  ""productsList"": [
+    {
+      ""id"": ""1"",
+      ""quantity"": 1
+    }
+    {
+      ""id"": ""2"",
+      ""quantity"": 1
+    }
+   :
+   :
+    {
+      ""id"": ""29"",
+      ""quantity"": 1
+    }
+  ]
+}",The products should be added as <=30 products are allowed ,-The system accepts 29 requests,Passed,
+15,"Verify if length of ""productslist"" can be 30","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends request with 30 existing product IDs and quantitites in the path params and request body.
+
+3. The user adds the 30 products to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.","Path params: id=6
+TOTAL 30 PRODUCTS IN THE LIST
+{
+  ""productsList"": [
+    {
+      ""id"": ""1"",
+      ""quantity"": 1
+    }
+    {
+      ""id"": ""2"",
+      ""quantity"": 1
+    }
+   :
+   :
+    {
+      ""id"": ""30"",
+      ""quantity"": 1
+    }
+  ]
+}",The products should be added as <=30 products are allowed ,-The system accepts 30 products,Passed,
+16,"Verify if error is displayed when the length of ""productslist"" is 31","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends request with 31 existing product IDs and quantitites in the path params and request body.
+
+3. Generates 400 Bad Request error and message, ""only 30 products are allowed in each kit"" can be added","Path params: id=6
+TOTAL 31 PRODUCTS IN THE LIST
+{
+  ""productsList"": [
+    {
+      ""id"": ""1"",
+      ""quantity"": 1
+    }
+    {
+      ""id"": ""2"",
+      ""quantity"": 1
+    }
+   :
+   :
+    {
+      ""id"": ""31"",
+      ""quantity"": 1
+    }
+  ]
+}",The products should not be added as <=30 products are allowed ,"-The system does not accept this input.
+ 
+-""400 Bad Request"" error is generated with the following response
+
+{
+   ""code"": 400,
+    ""message"": ""No more than 30 items per set""
+}",Passed,
+17,"Verify if error is displayed when the length of ""productslist"" is 32","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends request with 32 existing product IDs and quantitites in the path params and request body.
+
+3. Generates 400 Bad Request error and message, ""only 30 products are allowed in each kit"" can be added","Path params: id=6
+TOTAL 32 PRODUCTS IN THE LIST
+{
+  ""productsList"": [
+    {
+      ""id"": ""1"",
+      ""quantity"": 1
+    }
+    {
+      ""id"": ""2"",
+      ""quantity"": 1
+    }
+   :
+   :
+    {
+      ""id"": ""32"",
+      ""quantity"": 1
+    }
+  ]
+}",The products should not be added as <=30 products are allowed ,"-The system does not accept this input.
+ 
+-400 Bad Request error is generated with the following response
+
+{
+   ""code"": 400,
+    ""message"": ""No more than 30 items per set""
+}",Passed,
+18,Verify if user is using existing kitID (numbers) in the POST request ,"1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using a existent kit ID and a valid body structure in the POST request
+
+3. The product is added to the kit
+
+4.The user gets Status 200 K on the response",POST URL+/api/v1/kits/6/products,"- This input is allowed as kitID accepts number as a parameter
+
+-200 OK status is generated ","- This input is allowed as kitID accepts number as a parameter
+
+-200 OK status is generated ",Passed,
+19,"Verify if ""404 Not Found"" is returned when products with non-existent kitId are added to the kit ","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using a non-existent kit ID in the POST request
+
+3. This request generates ""404 Not Found"" error",POST URL+/api/v1/kits/100/products,"The system returns ""404 Not Found"" error","The system returns ""404 Not Found"" error",Passed,
+20,"Verify if ""404 Bad Request"" is returned when the request body does not contain the right structure","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request with BADLY STRUCTURED request body
+
+3. This request generates ""404 Bad Request"" error","POST URL+/api/v1/kits/6/products
+""Path params: id=6
+MISSING COMMA, SPACES ADDED WHERE NOT NEEDED
+{
+  ""productsList"": [
+    {
+      ""productId"" :  2 
+      ""quantity"":  4
+    }
+  ]
+}","The system returns ""404 Bad Request"" error","The system returns ""404 Bad Request"" error",Passed,
+21,"Verify if "":id"" param (kit Id) in the POST request is a number","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using an existing kitID where kitID id a number
+
+3. The user adds existing products to the kit on the response.
+
+4. The user gets Status: 200 OK on the response.",POST URL+/api/v1/kits/6/products,This request is acepted by the system as long as the kitID is an existing ID,This request is acepted by the system as long as the kitID is an existing ID,Passed,
+22,"Verify if "":id"" param (kit Id) in the POST request is a string","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using an existing kitID where kitID id a string
+
+3. 500 Internal Server Error is generated",POST URL+/api/v1/kits/six/products,"The system returns ""400 Not found""","The system returns ""500 Internal Server error""",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-14
+23,"Verify if "":id"" param (kit Id) in the POST request is special characters","1. The user selects POST request with URL + api/v1/kits/:id/products 
+
+2. The user sends a request by using an existing kitID where kitID has special characters instead of numbers
+
+3. 500 Internal Server Error is generated",POST URL+/api/v1/kits/#$/products,"The system returns ""400 Not found""","The system returns ""500 Internal Server error""",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-15
+,,,,,,,
+,,,,,,,
+No,Test Cases,Test Steps,Test Data (Request Body),Expected Result,Actual Result,Status,Link to Bug Report
+1,"Verify if the ""deliveryTime"" parameter is 6 ","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""deliveryTime"" param = 6 along with productCount and productWeight param
+
+3. The system should not accept this param as the ""fastest delivery"" time is between 7-21","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>5.115</productsWeight>
+   <deliveryTime>6</deliveryTime>
+ </InputModel>","-Invalid Input Data in Request
+
+
+-404 Bad Request should be generated","-200 OK is generated with the following response
+
+<response name=""Fast Delivery""/>",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-3
+2,"Verify if the ""deliveryTime"" parameter is 7","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""deliveryTime"" param = 7 along with productCount and productWeight param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time as 7 is an acceptable value for the ""fastest delivery"" time ","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>5.115</productsWeight>
+   <deliveryTime>7</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params",Passed,
+3,"Verify if the ""deliveryTime"" parameter is 8","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""deliveryTime"" param = 8 along with productCount and productWeight param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time as 8 is an acceptable value for the ""fastest delivery"" time ","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>5.115</productsWeight>
+   <deliveryTime>8</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params",Passed,
+4,"Verify if the ""deliveryTime"" parameter is 20","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""deliveryTime"" param = 20 along with productCount and productWeight param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time as 20 is an acceptable value for the ""fastest delivery"" time ","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>5.115</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params",Passed,
+5,"Verify if the ""deliveryTime"" parameter is 21","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""deliveryTime"" param = 21 along with productCount and productWeight param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time as 21 is an acceptable value for the ""fastest delivery"" time ","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>5.115</productsWeight>
+     <deliveryTime>21</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params",Passed,
+6,"Verify if the ""deliveryTime"" parameter is 22","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""deliveryTime"" param = 22 along with productCount and productWeight param
+
+3. The system should not accept this param as the ""fastest delivery"" time is between 7-21","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>5.115</productsWeight>
+   <deliveryTime>22</deliveryTime>
+ </InputModel>","-Invalid Input Data in Request
+
+
+-404 Bad Request should be generated","-200 OK is generated with the following response
+
+<response name=""Fast Delivery""/>",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-4
+7,"Verify if the ""productsWeight"" parameter is 0, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 0 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 0 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>0</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+8,"Verify if the ""productsWeight"" parameter is 0.1, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 0.1 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 0.1 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>0.1</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+9,"Verify if the ""productsWeight"" parameter is 2.4, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 2.4 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 2.4 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>2.4</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+10,"Verify if the ""productsWeight"" parameter is 2.5, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 2.5 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 2.5 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>2.5</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+11,"Verify if the ""productsWeight"" parameter is 2.6, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 2.6 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 2.6 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>2.6</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+12,"Verify if the ""productsWeight"" parameter is 2.7, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 2.7 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 2.7 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>2.7</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+13,"Verify if the ""productsWeight"" parameter is 5.9, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 5.9 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 5.9 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>5.9</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+14,"Verify if the ""productsWeight"" parameter is 6, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 6 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 6 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>6</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+-Response with ""toBeDelivered"" time is generated alongwith isItPossibleToDeliver, delivery type (""Fast Delivery""), DeliveryCost params",Passed,
+15,"Verify if the ""productsWeight"" parameter is 6.1, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsWeight"" param = 6.1 along with productCount and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 6.1 is an acceptable value for the ""productsWeight"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>6.1</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""9"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""6"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-5
+16,"Verify if the ""productsCount"" parameter is 0, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 0 along with productWeight and deliveryTime param
+
+3. The system generates an error as 0 is not an acceptable value for ""productsCount"" param","<InputModel>
+   <productsCount>0</productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-Invalid Input Data in Request
+
+
+-404 Bad Request should be generated","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-6
+17,"Verify if the ""productsCount"" parameter is 1, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 1 along with productWeight and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 1 is an acceptable value for the ""productsCount"" param","<InputModel>
+   <productsCount>1</productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+18,"Verify if the ""productsCount"" parameter is 2, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 2 along with productWeight and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 2 is an acceptable value for the ""productsCount"" param","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+19,"Verify if the ""productsCount"" parameter is 6, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 6 along with productWeight and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 6 is an acceptable value for the ""productsCount"" param","<InputModel>
+   <productsCount>6</productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+20,"Verify if the ""productsCount"" parameter is 7, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 7 along with productWeight and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 7 is an acceptable value for the ""productsCount"" param","<InputModel>
+   <productsCount>7</productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""3"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+21,"Verify if the ""productsCount"" parameter is 8, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 8 along with productWeight and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 8 is an acceptable value for the ""productsCount"" param","<InputModel>
+   <productsCount>8</productsCount>
+   <productsWeight>5.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+22,"Verify if the ""productsCount"" parameter is 9, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 9 along with productWeight and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 9 is an acceptable value for the ""productsCount"" param","<InputModel>
+   <productsCount>9</productsCount>
+   <productsWeight>5.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+23,"Verify if the ""productsCount"" parameter is 13, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 13 along with productWeight and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 13 is an acceptable value for the ""productsCount"" param","<InputModel>
+   <productsCount>13</productsCount>
+   <productsWeight>5.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+24,"Verify if the ""productsCount"" parameter is 14, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 14 along with productWeight and deliveryTime param
+
+3. The system generates 200 OK response 
+
+4. The system displays ""toBeDelivered"" time, as 14 is an acceptable value for the ""productsCount"" param","<InputModel>
+   <productsCount>14</productsCount>
+   <productsWeight>5.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","-The input data is accepted in the system
+
+-200 OK Response is generated
+
+- Expected Input 
+<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""0"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Passed,
+25,"Verify if the ""productsCount"" parameter is 15, all the costs are calculated correctly.","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request by using ""productsCount"" param = 14 along with productWeight and deliveryTime param
+
+3. The system generates 404 Not Found error as 15 is not an acceptable value for ""productsCount"" param","<InputModel>
+   <productsCount>15</productsCount>
+   <productsWeight>5.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""9"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>","<response name=""Fast Delivery"" isItPossibleToDeliver=""true"" hostDeliveryCost=""6"" clientDeliveryCost=""6"">
+    <toBeDeliveredTime>
+        <min>25</min>
+        <max>30</max>
+    </toBeDeliveredTime>
+</response>",Failed,https://shrutik2512.atlassian.net/browse/SWWKD-7
+26,Missing whole Request Body,"1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with an empty body
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   
+ </InputModel>","""404 Bad Request"" error is generated",500 Internal Server is generated,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-16
+27,"Missing ""productsCount"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with an empty body
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",500 Internal Server is generated,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-17
+28,"Missing ""productsWeight"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with an empty body
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount>7</productsCount>
+ 
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",500 Internal Server is generated,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-18
+29,"Missing ""deliveryTime"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with an empty body
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount>7</productsCount>
+   <productsWeight>1.8</productsWeight>
+  
+ </InputModel>","""404 Bad Request"" error is generated",500 Internal Server is generated,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-19
+30,"Empty values for ""productCount"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with an empty productCount param
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount> </productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-20
+31,"Empty values for ""productWeight"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with an empty productWeight
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight> </productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-21
+32,"Empty values for ""deliveryTime"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with a deliveryTime para
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime> </deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-22
+33,"Negative values for ""productCount"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with a negative param for productCount
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount> -1 </productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-23
+34,"Negative values for ""productWeight"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with a negative param for productWeight
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight> -1.1 </productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-24
+35,"Negative values for ""deliveryTime"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with a negative param for deliveryTime
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>-20 </deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-25
+36,"Latin characters for ""productCount"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with a latin characters for productCount
+
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount> ""aa"" </productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-26
+37,"Latin characters for ""productWeight"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with a Latin characters for productWeight
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight> ""aa"" </productsWeight>
+   <deliveryTime>20</deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-27
+38,"Latin characters for ""deliveryTime"" param","1. The user selects POST request with URL + /fast-delivery/v3.1.1/calculate-delivery.xml
+
+2.The user sends request with a Latin characters for deliveryTime
+3. The system generates ""404 Bad Request""
+
+","<InputModel>
+   <productsCount>2</productsCount>
+   <productsWeight>1.8</productsWeight>
+   <deliveryTime>""aa"" </deliveryTime>
+ </InputModel>","""404 Bad Request"" error is generated",System returns 200 OK response ,Failed,https://shrutik2512.atlassian.net/browse/SWWKD-28
